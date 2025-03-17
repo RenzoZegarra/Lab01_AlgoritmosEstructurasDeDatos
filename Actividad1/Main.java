@@ -43,7 +43,11 @@ public class Main {
 
             // Calcular el área de sobreposición
             Rectangulo areaSobreposicion = rectanguloSobre(rA, rB);
-            System.out.println("El area de los rectangulos sobrepuestos es: "+ rA.calcularAreaInterseccion(areaSobreposicion));
+            if(areaSobreposicion != null)
+            {
+                System.out.println("El area de los rectangulos sobrepuestos es: "+ rA.calcularAreaInterseccion(areaSobreposicion));
+            }
+            
         } else if (verificador.estanJuntos(rA, rB)) {
             System.out.println("Los rectángulos A y B están juntos.");
         } else {
@@ -63,15 +67,15 @@ public class Main {
 
     // Método para calcular el área de sobreposición de dos rectángulos
     public static Rectangulo rectanguloSobre(Rectangulo r1, Rectangulo r2) {
-        double x1 = Math.max(r1.getEsquina1().getX(), r2.getEsquina1().getX());
-        double y1 = Math.max(r1.getEsquina1().getY(), r2.getEsquina1().getY());
-        double x2 = Math.min(r1.getEsquina2().getX(), r2.getEsquina2().getX());
-        double y2 = Math.min(r1.getEsquina2().getY(), r2.getEsquina2().getY());
+        double x1 = Math.max(r1.getX1(), r2.getX1());
+        double y1 = Math.max(r1.getY1(), r2.getY1());
+        double x2 = Math.min(r1.getX2(), r2.getX2());
+        double y2 = Math.min(r1.getY2(), r2.getY2());
 
         if (x1 < x2 && y1 < y2) {
             return new Rectangulo(new Coordenada(x1, y1), new Coordenada(x2, y2));
         } else {
-            return new Rectangulo(new Coordenada(0, 0), new Coordenada(0, 0)); // No hay intersección
+            return null; // No hay intersección
         }
     }
 }
